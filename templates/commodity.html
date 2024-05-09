@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>KrushiSaathi</title>
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="{{ url_for('static', filename='css/responsive.static/css') }}" rel="stylesheet" />
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <style>
+        .forecast_table {
+            height: calc(100% - 20px); /* Adjust height */
+            overflow-y: auto; /* Add scroll for overflow */
+        }
+
+        .forecast_chart {
+            height: 100%; /* Ensure chart fills available space */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- header section starts -->
+    <header class="header_section">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+                <a class="navbar-brand" href="/">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /><span>KrushiSaathi</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+                        <ul class="navbar-nav  ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/service"> Services </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contact">Contact us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="quote_btn-container ml-0 ml-lg-4 d-flex justify-content-center">
+                        <a href="/feedback">Feedback</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content section -->
+    <div class="main_content">
+        <div class="container">
+            <h2 class="header" style="text-transform: capitalize;">{{context.name}}</h2>
+            <div class="row">
+                <div class="col s8 m7">
+                    <div class="card horizontal medium">
+                        <div class="card-image">
+                            <img src="{{ url_for('static', filename='crops/' + context.name + '.png') }}"
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <table>
+                                    <tr>
+                                        <td>Current Price</td>
+                                        <td><b>₹ {{context.current_price}} / ql</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Prime Location</td>
+                                        <td><b>{{context.prime_loc}}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Crop Type</td>
+                                        <td><b>{{context.type_c}}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Export</td>
+                                        <td><b>{{context.export}}</b></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card grey lighten-3 mt-3">
+                        <div class="card-content black-text">
+                            <span class="card-title">Brief Forecast</span>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p>Min. crop price time</p>
+                                    <td>
+                                        <h5>{{context.min_crop[0]}}</h5>
+                                    </td>
+                                    <td>
+                                        <h4>₹{{context.min_crop[1]}}</h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Max. crop price time</p>
+                                    <td>
+                                        <h5>{{context.max_crop[0]}}</h5>
+                                    </td>
+                                    <td>
+                                        <h4>₹{{context.max_crop[1]}}</h4>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+            
+
+                
+                    <div class="chartjs-wrapper">
+                        <canvas id="chartjs-0" class="forecast_chart"></canvas>
+                        <script>
+                            new Chart(document.getElementById("chartjs-0"), {
+                                type: "line",
+                                data: {
+                                    labels: {{context.forecast_x|safe}},
+                                    datasets: [{
+                                        label: "Next year Price",
+                                        data: {{context.forecast_y}},
+                                        fill: false,
+                                        borderColor: "#46b422",
+                                        lineTension: 0.1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                        yAxes: [{
+                                            display: true,
+                                            ticks: {
+                                                suggestedMin: 1000,
+                                                stepSize: 200
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="chartjs-wrapper">
+                        <canvas id="chartjs-1" class="forecast_chart"></canvas>
+                        <script>
+                            new Chart(document.getElementById("chartjs-1"), {
+                                type: "line",
+                                data: {
+                                    labels: {{context.previous_x|safe}},
+                                    datasets: [{
+                                        label: "Previous year price",
+                                        data: {{context.previous_y}},
+                                        fill: false,
+                                        borderColor: "#46b422",
+                                        lineTension: 0.1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                        yAxes: [{
+                                            display: true,
+                                            ticks: {
+                                                suggestedMin: 1000,
+                                                stepSize: 200
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="main_content" style="font-family: 'Poppins', sans-serif;">
+        <div class="container" style="display: flex; justify-content: space-between;">
+            <!-- Button to go back -->
+            <div>
+                <a href="/price" class="btn btn-success mt-3" style="background-color: #46b422; color: white;">Go Back</a>
+            </div>
+            <div>
+                <a href="/" class="btn btn-success mt-3" style="background-color: #46b422; color: white;">Home Page</a>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>

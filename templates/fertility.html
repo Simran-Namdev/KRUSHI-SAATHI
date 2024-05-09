@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>KrushiSaathi</title>
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="{{ url_for('static', filename='css/responsive.static/css') }}" rel="stylesheet" />
+</head>
+<body>
+           
+        <!-- header section starts -->
+        <header class="header_section">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+                    <a class="navbar-brand" href="/">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}"  alt="" /><span>KrushiSaathi</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+                            <ul class="navbar-nav  ">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/service"> Services </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/contact">Contact us</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="quote_btn-container ml-0 ml-lg-4 d-flex justify-content-center">
+                            <a href="/feedback">Feedback</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <div class="container">
+            <h1 class="custom_heading">Soil Fertility Prediction</h1>
+            <form id="prediction-form" class="custom_form-container">
+                <div class="form-group">
+                    <label for="N">Nitrogen (NH4+):</label>
+                    <input type="text" name="N" id="N" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="P">Phosphorous (P):</label>
+                    <input type="text" name="P" id="P" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="K">Potassium (K):</label>
+                    <input type="text" name="K" id="K" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pH">Soil acidity (pH):</label>
+                    <input type="text" name="pH" id="pH" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="EC">Electrical Conductivity:</label>
+                    <input type="text" name="EC" id="EC" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="OC">Organic Carbon:</label>
+                    <input type="text" name="OC" id="OC" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="S">Sulfur (S):</label>
+                    <input type="text" name="S" id="S" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="Zn">Zinc (Zn):</label>
+                    <input type="text" name="Zn" id="Zn" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="Fe">Iron (Fe):</label>
+                    <input type="text" name="Fe" id="Fe" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="Cu">Copper (Cu):</label>
+                    <input type="text" name="Cu" id="Cu" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="Mn">Manganese (Mn):</label>
+                    <input type="text" name="Mn" id="Mn" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="B">Boron (B):</label>
+                    <input type="text" name="B" id="B" class="form-control" required>
+                </div>
+                <button type="submit" class="btn custom_orange-btn">Predict</button>
+            </form>
+            <div id="result"></div>
+        </div>
+        
+        
+        <!-- end header section -->
+        <section class="service_section layout_padding ">
+            <div class="container">
+                <div class=" layout_padding2">
+                    <div class="card-deck">
+                        <div class="card">
+                            <a href="/soil">
+                                <img class="card-img-top" src="{{ url_for('static', filename='images/card-item-1.png') }}" alt="Card image cap" style="width:80px;height:80px;" />
+                                <div class="card-body">
+                                    <h5 class="card-title">Soil Classification</h5>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="/">
+                                <img class="card-img-top" src="{{ url_for('static', filename='images/card-item-6.png') }}" alt="Card image cap" style="width:80px;height:80px;" />
+                                <div class="card-body">
+                                    <h5 class="card-title">Home Page</h5>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="/fertilizer">
+                                <img class="card-img-top" src="{{ url_for('static', filename='images/card-item-3.png') }}" alt="Card image cap" style="width:80px;height:80px;" />
+                                <div class="card-body">
+                                    <h5 class="card-title">Fertilizer Recommendation</h5>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="/disease">
+                                <img class="card-img-top" src="{{ url_for('static', filename='images/card-item-4.png') }}" alt="Card image cap" style="width:80px;height:80px;" />
+                                <div class="card-body">
+                                    <h5 class="card-title">Plant Disease Classifier</h5>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top" src="{{ url_for('static', filename='images/card-item-5.png') }}" alt="Card image cap" style="width:80px;height:80px;" />
+                            <div class="card-body">
+                                <h5 class="card-title">Crop Price and Yield Prediction</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{ url_for('static', filename='fertilityscript.js') }}"></script>
+</body>
+</html>

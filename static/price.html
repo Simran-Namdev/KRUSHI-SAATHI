@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodity Analysis</title>
+    <!-- Include any CSS stylesheets or external libraries here -->
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Commodity Analysis</h1>
+    </header>
+
+    <!-- Section for Top Five Winners -->
+    <section id="top-winners">
+        <h2>Top Five Winners</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Crop</th>
+                    <th>Price</th>
+                    <th>Percentage Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for winner in winners %}
+                <tr>
+                    <td>{{ winner[0] }}</td>
+                    <td>{{ winner[1] }}</td>
+                    <td>{{ winner[2] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Section for Top Five Losers -->
+    <section id="top-losers">
+        <h2>Top Five Losers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Crop</th>
+                    <th>Price</th>
+                    <th>Percentage Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for loser in losers %}
+                <tr>
+                    <td>{{ loser[0] }}</td>
+                    <td>{{ loser[1] }}</td>
+                    <td>{{ loser[2] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Section for Six Months Forecast -->
+    <section id="six-months-forecast">
+        <h2>Six Months Forecast</h2>
+        <ul>
+            {% for forecast_item in forecast %}
+            <li>{{ forecast_item }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!-- Section for Twelve Months Forecast -->
+    <section id="twelve-months-forecast">
+        <h2>Twelve Months Forecast</h2>
+        <div>
+            <h3>Max Crop</h3>
+            <p>{{ max_crop }}</p>
+        </div>
+        <div>
+            <h3>Min Crop</h3>
+            <p>{{ min_crop }}</p>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Price</th>
+                    <th>Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for price in crop_price %}
+                <tr>
+                    <td>{{ price[0] }}</td>
+                    <td>{{ price[1] }}</td>
+                    <td>{{ price[2] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Include any JavaScript files or libraries here -->
+    <script src="scripts.js"></script>
+</body>
+</html>
