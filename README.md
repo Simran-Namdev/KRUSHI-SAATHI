@@ -51,13 +51,13 @@ The repository follows a specific folder structure:
 1. Clone the repository:
 
 ```
-git clone https://github.com/AaronANoronha-Pr/EPICS---KrushiSaathi
+git clone https://github.com/Simran-Namdev/KRUSHI-SAATHI
 ```
 
 2. Navigate to the project directory:
 
 ```
-cd krushi-saathi
+cd KRUSHI-SAATHI
 ```
 
 3. Install the required Python packages:
